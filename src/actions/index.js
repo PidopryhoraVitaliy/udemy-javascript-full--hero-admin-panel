@@ -3,14 +3,12 @@ export const heroesFetching = () => {
         type: 'HEROES_FETCHING'
     }
 }
-
 export const heroesFetched = (heroes) => {
     return {
         type: 'HEROES_FETCHED',
         payload: heroes
     }
 }
-
 export const heroesFetchingError = () => {
     return {
         type: 'HEROES_FETCHING_ERROR'
@@ -29,9 +27,49 @@ export const heroesDeleted = (heroesId) => {
         payload: heroesId
     }
 }
-export const heroesDeletingError = (heroesId) => {
+export const heroesDeletingError = () => {
     return {
-        type: 'HEROES_DELETING_ERROR',
-        payload: heroesId
+        type: 'HEROES_DELETING_ERROR'
+    }
+}
+
+export const heroesAdding = () => {
+    return {
+        type: 'HEROES_ADDING'
+    }
+}
+export const heroesAdded = (heroes) => {
+    return {
+        type: 'HEROES_ADDED',
+        payload: heroes
+    }
+}
+export const heroesAddingError = () => {
+    return {
+        type: 'HEROES_ADDING_ERROR'
+    }
+}
+export const heroesAddingErrorData = () => {
+    return {
+        type: 'HEROES_ADDING_ERROR_DATA'
+    }
+}
+export const heroesAddingClearError = () => {
+    return {
+        type: 'HEROES_ADDING_CLEAR_ERROR'
+    }
+}
+
+export const filtersFetched = (filters) => {
+    return {
+        type: 'FILTERS_FETCHED',
+        payload: filters
+    }
+}
+
+export const filtersChangeActiveFilter = (filterName) => {
+    return {
+        type: 'FILTERS_CHANGE_ACTIVE',
+        payload: filterName
     }
 }
