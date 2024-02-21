@@ -1,5 +1,5 @@
 
-const HeroesListItem = ({ name, description, element, deleteHeroes }) => {
+const HeroesListItem = ({ name, description, element, deleteHero }) => {
 
     let elementClassName;
 
@@ -34,7 +34,7 @@ const HeroesListItem = ({ name, description, element, deleteHeroes }) => {
                 <p className="card-text">{description}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button type="button" className="btn-close btn-close" aria-label="Close" onClick={deleteHeroes}></button>
+                <button type="button" className="btn-close btn-close" aria-label="Close" onClick={deleteHero}></button>
             </span>
         </li>
     )
