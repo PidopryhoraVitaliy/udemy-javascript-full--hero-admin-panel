@@ -1,3 +1,10 @@
+export const fetchHeroes = (request) => (dispatch) => {
+    dispatch(heroesFetching());
+    request("http://localhost:3001/heroes")
+        .then(data => dispatch(heroesFetched(data)))
+        .catch(() => dispatch(heroesFetchingError()));
+}
+
 export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'
@@ -60,16 +67,39 @@ export const heroesAddingClearError = () => {
     }
 }
 
+export const fetchFilters = (request) => (dispatch) => {
+    dispatch(filtersFetching());
+    request("http://localhost:3001/filters")
+        .then(data => dispatch(filtersFetched(data)))
+        .catch(() => dispatch(filtersFetchingError()))
+}
+export const filtersFetching = () => {
+    return {
+        type: 'FILTERS_FETCHING'
+    }
+}
 export const filtersFetched = (filters) => {
     return {
         type: 'FILTERS_FETCHED',
         payload: filters
     }
 }
-
-export const filtersChangeActiveFilter = (filterName) => {
+export const filtersChangeActiveFilter = (filter) => {
     return {
-        type: 'FILTERS_CHANGE_ACTIVE',
-        payload: filterName
+        type: 'ACTIVE_FILTER_CHANGED',
+        payload: filter
+    }
+}
+// export const filtersChangeActiveFilter = (filter) => (dispatch) => {
+//     setTimeout(() => {
+//         dispatch({
+//             type: 'FILTERS_CHANGE_ACTIVE',
+//             payload: filter
+//         })
+//     }, 500);
+// }
+export const filtersFetchingError = () => {
+    return {
+        type: 'FILTERS_FETCHING_ERROR'
     }
 }

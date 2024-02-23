@@ -8,17 +8,29 @@ const initialFilters = [
 
 const initialState = {
     activeFilter: 'all',
-    filters: initialFilters
+    filters: initialFilters,
+    filtersLoadingStatus: 'idle'
 }
 
 const filters = (state = initialState, action) => {
     switch (action.type) {
+        case 'FILTERS_FETCHING':
+            return {
+                ...state,
+                filtersLoadingStatus: 'loading',
+            }
         case 'FILTERS_FETCHED':
             return {
                 ...state,
+                filtersLoadingStatus: 'idle',
                 filters: action.payload,
             }
-        case 'FILTERS_CHANGE_ACTIVE':
+        case 'FILTERS_FETCHING_ERROR':
+            return {
+                ...state,
+                filtersLoadingStatus: 'error',
+            }
+        case 'ACTIVE_FILTER_CHANGED':
             return {
                 ...state,
                 activeFilter: action.payload,
