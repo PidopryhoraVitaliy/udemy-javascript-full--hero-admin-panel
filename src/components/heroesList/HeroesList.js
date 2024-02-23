@@ -1,7 +1,8 @@
 import { useHttp } from '../../hooks/http.hook';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { createSelector } from 'reselect'
 
 import { heroesFetching, heroesFetched, heroesFetchingError, heroesDeleting, heroesDeleted, heroesDeletingError } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
@@ -15,9 +16,28 @@ import './heroesList.scss';
 // Удаление идет и с json файла при помощи метода DELETE
 
 const HeroesList = () => {
-    const { heroes, heroesLoadingStatus, activeFilter } = useSelector(state => state);
+    const filtredHeroesSelector = createSelector(
+        state => state.filters.activeFilter,
+        state => state.heroes.heroes,
+        (activeFilter, heroes) => {
+            console.log('state');
+            return (activeFilter === 'all') ? heroes : heroes.filter(h => h.element === activeFilter)
+        }
+    );
+    const filtredHeroes = useSelector(filtredHeroesSelector);
+    // const filtredHeroes = useSelector(state => {
+    //     console.log('filtredHeroes');
+    //     if (state.filters.activeFilter === 'all') {
+    //         return state.heroes.heroes;
+    //     } else {
+    //         return state.heroes.heroes.filter(h => h.element === state.filters.activeFilter);
+    //     }
+    // });
+    const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
     const dispatch = useDispatch();
     const { request } = useHttp();
+
+    console.log('render');
 
     useEffect(() => {
         dispatch(heroesFetching());
@@ -47,27 +67,26 @@ const HeroesList = () => {
         }
 
         return arr.map(({ id, ...props }) => {
-            // return <HeroesListItem key={id} {...props} deleteHero={() => deleteHero(id)} />
-            return (
-                <CSSTransition
-                    key={id}
-                    timeout={1000}
-                    classNames="hero">
-                    <HeroesListItem  {...props} deleteHero={() => deleteHero(id)} />
-                </CSSTransition>
-            )
+            return <HeroesListItem key={id} {...props} deleteHero={() => deleteHero(id)} />
+            // return (
+            //     <CSSTransition
+            //         key={id}
+            //         timeout={1000}
+            //         classNames="hero">
+            //         <HeroesListItem  {...props} deleteHero={() => deleteHero(id)} />
+            //     </CSSTransition>
+            // )
         })
     }
 
-    const filtredHeroes = (activeFilter === 'all') ? heroes : heroes.filter(h => h.element === activeFilter);
-
     const elements = renderHeroesList(filtredHeroes);
     return (
-        // <ul>
-        <TransitionGroup component="ul">
+        <ul>
             {elements}
-        </TransitionGroup>
-        // </ul>
+        </ul>
+        // <TransitionGroup component="ul">
+        //     {elements}
+        // </TransitionGroup>
     )
 }
 

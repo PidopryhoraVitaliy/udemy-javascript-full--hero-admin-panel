@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filtersChangeActiveFilter } from "../../actions";
 
 const HeroesFilters = () => {
-    const { activeFilter, filters } = useSelector(state => state);
+    const { activeFilter, filters } = useSelector(state => state.filters);
     const dispatch = useDispatch();
 
     const changeActiveFilter = (name) => {

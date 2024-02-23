@@ -18,7 +18,8 @@ import { useHttp } from "../../hooks/http.hook";
 
 const HeroesAddForm = () => {
 
-    const { heroesAddingStatus, filters } = useSelector(state => state);
+    const { filters } = useSelector(state => state.filters);
+    const { heroesAddingStatus } = useSelector(state => state.heroes);
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
