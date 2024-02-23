@@ -40,7 +40,8 @@ const HeroesList = () => {
     console.log('render');
 
     useEffect(() => {
-        dispatch(heroesFetching());
+        //dispatch(heroesFetching());
+        dispatch('HEROES_FETCHING');
         request("http://localhost:3001/heroes")
             .then(data => dispatch(heroesFetched(data)))
             .catch(() => dispatch(heroesFetchingError()))
