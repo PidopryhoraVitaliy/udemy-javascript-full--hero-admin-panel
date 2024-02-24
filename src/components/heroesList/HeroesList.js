@@ -2,19 +2,17 @@ import { useHttp } from '../../hooks/http.hook';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { createSelector } from 'reselect'
+// import { createSelector } from 'reselect'
+import { createSelector } from '@reduxjs/toolkit'
 
-import { fetchHeroes } from '../../actions';
-import { heroesDeleting, heroesDeleted, heroesDeletingError } from '../../slices/heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
-import './heroesList.scss';
+// import { fetchHeroes } from '../../actions';
+import { fetchHeroes } from '../../slices/heroesSlice';
+import { heroesDeleting, heroesDeleted, heroesDeletingError } from '../../slices/heroesSlice';
 
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
+import './heroesList.scss';
 
 const HeroesList = () => {
     const filtredHeroesSelector = createSelector(
@@ -30,7 +28,7 @@ const HeroesList = () => {
     const { request } = useHttp();
 
     useEffect(() => {
-        dispatch(fetchHeroes(request));
+        dispatch(fetchHeroes());
         // eslint-disable-next-line
     }, []);
 
@@ -39,6 +37,7 @@ const HeroesList = () => {
         request("http://localhost:3001/heroes/" + id, 'DELETE')
             .then(() => dispatch(heroesDeleted(id)))
             .catch(() => dispatch(heroesDeletingError()))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [request]);
 
     if (heroesLoadingStatus === "loading") {

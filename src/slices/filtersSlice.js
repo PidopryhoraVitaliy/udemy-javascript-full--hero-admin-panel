@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { useHttp } from '../hooks/http.hook';
 
 const initialFilters = [
     { name: "all", label: "Все", className: "btn-outline-dark" },
@@ -14,19 +15,38 @@ const initialState = {
     filtersLoadingStatus: 'idle'
 }
 
+export const fetchFilters = createAsyncThunk(
+    'filters/fetchFilters',
+    async () => {
+        const { request } = useHttp();
+        return await request("http://localhost:3001/filters")
+    },
+)
+
 const filtersSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
-        filtersFetching: state => { state.filtersLoadingStatus = 'loading' },
-        filtersFetched: (state, action) => {
-            state.filtersLoadingStatus = 'idle';
-            state.filters = action.payload;
-        },
+        // filtersFetching: state => { state.filtersLoadingStatus = 'loading' },
+        // filtersFetched: (state, action) => {
+        //     state.filtersLoadingStatus = 'idle';
+        //     state.filters = action.payload;
+        // },
+        // filtersFetchingError: state => { state.filtersLoadingStatus = 'error' },
         filtersChangeActiveFilter: (state, action) => { state.activeFilter = action.payload },
-        filtersFetchingError: state => { state.filtersLoadingStatus = 'error' },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchFilters.pending, state => { state.filtersLoadingStatus = 'loading' })
+            .addCase(fetchFilters.fulfilled, (state, action) => {
+                state.filtersLoadingStatus = 'idle';
+                state.filters = action.payload;
+            })
+            .addCase(fetchFilters.rejected, state => { state.filtersLoadingStatus = 'error' })
+    }
 })
 
-export const { filtersFetching, filtersFetched, filtersChangeActiveFilter, filtersFetchingError } = filtersSlice.actions;
+export const { filtersChangeActiveFilter,
+    // filtersFetching, filtersFetched, filtersFetchingError
+} = filtersSlice.actions;
 export default filtersSlice.reducer

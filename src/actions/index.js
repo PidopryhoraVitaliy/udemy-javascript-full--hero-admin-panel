@@ -1,14 +1,14 @@
 // import { createAction } from '@reduxjs/toolkit';
 
-import { heroesFetched, heroesFetching, heroesFetchingError } from "../slices/heroesSlice";
-import { filtersFetched, filtersFetching, filtersFetchingError } from "../slices/filtersSlice";
+// import { heroesFetched, heroesFetching, heroesFetchingError } from "../slices/heroesSlice";
+// import { filtersFetched, filtersFetching, filtersFetchingError } from "../slices/filtersSlice";
 
-export const fetchHeroes = (request) => (dispatch) => {
-    dispatch(heroesFetching());
-    request("http://localhost:3001/heroes")
-        .then(data => dispatch(heroesFetched(data)))
-        .catch(() => dispatch(heroesFetchingError()));
-}
+// export const fetchHeroes = (request) => (dispatch) => {
+//     dispatch(heroesFetching());
+//     request("http://localhost:3001/heroes")
+//         .then(data => dispatch(heroesFetched(data)))
+//         .catch(() => dispatch(heroesFetchingError()));
+// }
 
 // export const heroesFetching = createAction('HEROES_FETCHING');
 // // export const heroesFetching = () => {
@@ -85,12 +85,12 @@ export const fetchHeroes = (request) => (dispatch) => {
 
 // FILTERS
 
-export const fetchFilters = (request) => (dispatch) => {
-    dispatch(filtersFetching());
-    request("http://localhost:3001/filters")
-        .then(data => dispatch(filtersFetched(data)))
-        .catch(() => dispatch(filtersFetchingError()))
-}
+// export const fetchFilters = (request) => (dispatch) => {
+//     dispatch(filtersFetching());
+//     request("http://localhost:3001/filters")
+//         .then(data => dispatch(filtersFetched(data)))
+//         .catch(() => dispatch(filtersFetchingError()))
+// }
 // export const filtersFetching = () => {
 //     return {
 //         type: 'FILTERS_FETCHING'

@@ -5,15 +5,17 @@ import HeroesFilters from '../heroesFilters/HeroesFilters';
 import './app.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHttp } from '../../hooks/http.hook';
-import { fetchFilters } from '../../actions';
+// import { useHttp } from '../../hooks/http.hook';
+import { fetchFilters } from '../../slices/filtersSlice';
 
 const App = () => {
     const dispatch = useDispatch();
-    const { request } = useHttp();
+    // const { request } = useHttp();
 
     useEffect(() => {
-        dispatch(fetchFilters(request));
+        // dispatch(fetchFilters(request));
+        dispatch(fetchFilters());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
