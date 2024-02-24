@@ -1,19 +1,19 @@
 {
   "heroes": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Первый герой",
       "description": "Первый герой в рейтинге!",
       "element": "fire"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Неизвестный герой",
       "description": "Скрывающийся в тени",
       "element": "wind"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
@@ -25,9 +25,15 @@
       "element": "earth"
     },
     {
-      "id": "49c07208-34ff-46e1-a66a-5e44158437aa",
-      "name": "123",
-      "description": "123",
+      "id": "cdaf6699-81c0-47f3-8a49-8e4140160979",
+      "name": "Vitalii Pidopryhora",
+      "description": "qwerty",
+      "element": "fire"
+    },
+    {
+      "id": "4800bbf4-2da5-47bf-88ce-26329e34ce19",
+      "name": "vpidopryhora@gmail.com",
+      "description": "5637",
       "element": "fire"
     }
   ],
@@ -35,32 +41,38 @@
     {
       "name": "all",
       "label": "Все",
-      "className": "btn-outline-dark"
+      "className": "btn-outline-dark",
+      "id": "049d"
     },
     {
       "name": "fire",
       "label": "Огонь",
-      "className": "btn-danger"
+      "className": "btn-danger",
+      "id": "accf"
     },
     {
       "name": "water",
       "label": "Вода",
-      "className": "btn-primary"
+      "className": "btn-primary",
+      "id": "9fc2"
     },
     {
       "name": "wind",
       "label": "Ветер",
-      "className": "btn-success"
+      "className": "btn-success",
+      "id": "aa03"
     },
     {
       "name": "earth",
       "label": "Земля",
-      "className": "btn-secondary"
+      "className": "btn-secondary",
+      "id": "4571"
     },
     {
       "name": "test",
       "label": "test",
-      "className": "btn-secondary"
+      "className": "btn-secondary",
+      "id": "a914"
     }
   ]
 }

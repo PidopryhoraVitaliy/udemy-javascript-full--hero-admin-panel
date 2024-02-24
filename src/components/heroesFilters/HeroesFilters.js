@@ -7,7 +7,7 @@
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 import { useDispatch, useSelector } from "react-redux";
-import { filtersChangeActiveFilter } from "../../actions";
+import { filtersChangeActiveFilter } from "../../slices/filtersSlice";
 
 const HeroesFilters = () => {
     const { activeFilter, filters } = useSelector(state => state.filters);

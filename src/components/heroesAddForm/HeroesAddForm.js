@@ -13,7 +13,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
-import { heroesAdded, heroesAdding, heroesAddingClearError, heroesAddingError, heroesAddingErrorData } from "../../actions";
+import { heroesAdded, heroesAdding, heroesAddingClearError, heroesAddingError, heroesAddingErrorData } from "../../slices/heroesSlice";
 import { useHttp } from "../../hooks/http.hook";
 
 const HeroesAddForm = () => {
@@ -29,7 +29,9 @@ const HeroesAddForm = () => {
     const { request } = useHttp();
 
     const handleInputChange = (e, setter) => {
-        dispatch(heroesAddingClearError())
+        if (heroesAddingStatus.includes('error')) {
+            dispatch(heroesAddingClearError())
+        }
         setter(e.target.value);
     }
 
