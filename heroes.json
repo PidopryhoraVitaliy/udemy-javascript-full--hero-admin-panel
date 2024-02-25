@@ -19,27 +19,21 @@
       "element": "water"
     },
     {
-      "id": "4ffa13d9-433b-4c82-9ec7-ae79a3c54726",
-      "name": "Виталий",
-      "description": "qwert",
-      "element": "earth"
-    },
-    {
-      "id": "cdaf6699-81c0-47f3-8a49-8e4140160979",
-      "name": "Vitalii Pidopryhora",
-      "description": "qwerty",
-      "element": "fire"
-    },
-    {
-      "id": "4800bbf4-2da5-47bf-88ce-26329e34ce19",
+      "id": "9fbd947a-9306-4a9b-ab9a-cb31682f8ef9",
       "name": "vpidopryhora@gmail.com",
-      "description": "5637",
+      "description": "457",
       "element": "fire"
     },
     {
-      "id": "cea18a95-8ef6-4c70-8b7c-72f7bb846f82",
+      "id": "0855b33d-f63e-4f67-90f6-46e12f721ea2",
       "name": "Vitalii Pidopryhora",
-      "description": "qwe",
+      "description": "123",
+      "element": "water"
+    },
+    {
+      "id": "a39af1c7-30a4-4adf-91a5-47c8b867b74e",
+      "name": "Vitalii Pidopryhora",
+      "description": "rf423rt43",
       "element": "wind"
     }
   ],
