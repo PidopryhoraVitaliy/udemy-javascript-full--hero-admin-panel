@@ -5,49 +5,29 @@ import { heroesAdded, heroesAdding, heroesAddingClearError, heroesAddingError, h
 import { useHttp } from "../../hooks/http.hook";
 import { selectAll } from "../../slices/filtersSlice";
 import store from "../../store"
+import { useCreateHeroMutation } from "../../api/apiSlice";
 
 const HeroesAddForm = () => {
 
-    //const { filters } = useSelector(state => state.filters);
-    // const filters = useSelector(selectAll);
     const filters = selectAll(store.getState());
 
-    const { heroesAddingStatus } = useSelector(state => state.heroes);
+    const [createHero, { isLoading, isError }] = useCreateHeroMutation();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [element, setElement] = useState('empty');
 
-    const dispatch = useDispatch();
-    const { request } = useHttp();
-
     const handleInputChange = (e, setter) => {
-        if (heroesAddingStatus.includes('error')) {
-            dispatch(heroesAddingClearError())
-        }
         setter(e.target.value);
-    }
-
-    const clearForm = () => {
-        setName('');
-        setDescription('');
-        setElement('empty');
     }
 
     const addHeroe = (e) => {
         e.preventDefault();
-        if (!name || !description || element === 'empty') {
-            dispatch(heroesAddingErrorData())
-            return;
-        }
-        dispatch(heroesAdding());
-        const heroe = { id: uuidv4(), name, description, element };
-        request("http://localhost:3001/heroes/", 'POST', JSON.stringify(heroe))
-            .then((data) => {
-                clearForm();
-                dispatch(heroesAdded(data))
-            })
-            .catch(() => dispatch(heroesAddingError()))
+        const hero = { id: uuidv4(), name, description, element };
+        createHero(hero).unwrap();
+        setName('');
+        setDescription('');
+        setElement('empty');
     }
 
     const elements = filters.map((filter) => {
@@ -108,15 +88,12 @@ const HeroesAddForm = () => {
 
             <button type="submit"
                 className="btn btn-primary"
-                disabled={heroesAddingStatus !== 'idle'}>
+                disabled={isLoading}>
                 Создать
             </button>
 
-            {heroesAddingStatus === 'error'
+            {isError
                 ? <div>server error</div>
-                : null}
-            {heroesAddingStatus === 'error_data'
-                ? <div>check input data</div>
                 : null}
         </form>
     )
